@@ -4,7 +4,6 @@ const postcss = require('postcss');
 const autoprefixer = require('autoprefixer');
 const npmImportPlugin = require('less-plugin-npm-import'); // 支持波浪号导入node_modules中的样式
 const argus = require('optimist').argv;
-const logStyle = require('./script-log-style');
 const path = require('path');
 
 let [name] = argus._;
@@ -76,10 +75,12 @@ function moveStyleFiles(filePaths, targetDir) {
     const filePathInLib = dir.split(path.resolve(projectPath))[1];
     // console.log(filePathInLib);
     const targetFilePath = `${targetDir}${filePathInLib}`;
+    // console.log(targetFilePath);
     try {
       fs.mkdirSync(targetFilePath);
     } catch (error) {
     }
+    // console.log(filePath, `${targetDir}/${filePathInLib}/${base}`);
     fs.copyFileSync(filePath, `${targetDir}/${filePathInLib}/${base}`);
   });
 }
@@ -88,7 +89,7 @@ let content;
 try {
   content = fs.readFileSync(projectMainLessPath, 'utf8');
 } catch (error) {
-  console.log(logStyle.err(`没有${name}.less`));
+  console.log(`没有${name}.less`);
   return;
 }
 
@@ -109,6 +110,7 @@ less.render(content,
           copyCSS(res.css);
           fs.copyFileSync(projectMainLessPath, `${distPath}/${name}.less`);
           fileImportPaths(projectMainLessPath);
+          // console.log(lessPaths);
           moveStyleFiles(lessPaths, distPath);
         })
         .catch(err => { console.log(err) });

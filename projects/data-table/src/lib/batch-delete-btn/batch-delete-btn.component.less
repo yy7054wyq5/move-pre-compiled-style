@@ -1,0 +1,36 @@
+@import '../style/index.less';
+
+.delete-row {
+  display: flex;
+  flex-direction: column;
+  .arrow {
+    transform: rotate(90deg) translate3d(1px, -4px, 0);
+    display: inline-block;
+    font-weight: bold;
+  }
+  .options-container {
+    position: relative;
+    ul {
+      display: none;
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 2;
+      background-color: #fff;
+      border: 1px solid @table-border-color;
+      border-radius: @table-border-radius;
+      font-size: @table-font-size;
+      li {
+        cursor: pointer;
+        padding: 4px;
+        white-space: nowrap;
+      }
+      li:first-child {
+        border-bottom: 1px solid @table-border-radius;
+      }
+      &.show {
+        display: block;
+      }
+    }
+  }
+}
