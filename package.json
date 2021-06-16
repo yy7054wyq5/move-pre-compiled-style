@@ -15,7 +15,7 @@
 		"less-plugin-npm-import": "^2.1.0",
 		"ng-packagr": "^4.2.0",
 		"optimist": "^0.6.1",
-		"postcss": "^7.0.16",
+		"postcss": "^7.0.36",
 		"protractor": "~5.4.0"
 	},
 	"browserslist": [
